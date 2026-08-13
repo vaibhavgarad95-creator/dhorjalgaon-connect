@@ -15,6 +15,7 @@ import { Route as PraveshRouteImport } from './routes/pravesh'
 import { Route as SamasyaRouteImport } from './routes/samasya'
 import { Route as SthitiRouteImport } from './routes/sthiti'
 import { Route as GaaveIndexRouteImport } from './routes/gaave.index'
+import { Route as GaaveVillageRouteImport } from './routes/gaave.$village'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,6 +47,11 @@ const GaaveIndexRoute = GaaveIndexRouteImport.update({
   path: '/gaave/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GaaveVillageRoute = GaaveVillageRouteImport.update({
+  id: '/gaave/$village',
+  path: '/gaave/$village',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/pravesh': typeof PraveshRoute
   '/samasya': typeof SamasyaRoute
   '/sthiti': typeof SthitiRoute
+  '/gaave/$village': typeof GaaveVillageRoute
   '/gaave/': typeof GaaveIndexRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +68,7 @@ export interface FileRoutesByTo {
   '/pravesh': typeof PraveshRoute
   '/samasya': typeof SamasyaRoute
   '/sthiti': typeof SthitiRoute
+  '/gaave/$village': typeof GaaveVillageRoute
   '/gaave': typeof GaaveIndexRoute
 }
 export interface FileRoutesById {
@@ -70,13 +78,28 @@ export interface FileRoutesById {
   '/pravesh': typeof PraveshRoute
   '/samasya': typeof SamasyaRoute
   '/sthiti': typeof SthitiRoute
+  '/gaave/$village': typeof GaaveVillageRoute
   '/gaave/': typeof GaaveIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/kalpana' | '/pravesh' | '/samasya' | '/sthiti' | '/gaave/'
+  fullPaths:
+    | '/'
+    | '/kalpana'
+    | '/pravesh'
+    | '/samasya'
+    | '/sthiti'
+    | '/gaave/$village'
+    | '/gaave/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/kalpana' | '/pravesh' | '/samasya' | '/sthiti' | '/gaave'
+  to:
+    | '/'
+    | '/kalpana'
+    | '/pravesh'
+    | '/samasya'
+    | '/sthiti'
+    | '/gaave/$village'
+    | '/gaave'
   id:
     | '__root__'
     | '/'
@@ -84,6 +107,7 @@ export interface FileRouteTypes {
     | '/pravesh'
     | '/samasya'
     | '/sthiti'
+    | '/gaave/$village'
     | '/gaave/'
   fileRoutesById: FileRoutesById
 }
@@ -93,6 +117,7 @@ export interface RootRouteChildren {
   PraveshRoute: typeof PraveshRoute
   SamasyaRoute: typeof SamasyaRoute
   SthitiRoute: typeof SthitiRoute
+  GaaveVillageRoute: typeof GaaveVillageRoute
   GaaveIndexRoute: typeof GaaveIndexRoute
 }
 
@@ -140,6 +165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GaaveIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gaave/$village': {
+      id: '/gaave/$village'
+      path: '/gaave/$village'
+      fullPath: '/gaave/$village'
+      preLoaderRoute: typeof GaaveVillageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -149,6 +181,7 @@ const rootRouteChildren: RootRouteChildren = {
   PraveshRoute: PraveshRoute,
   SamasyaRoute: SamasyaRoute,
   SthitiRoute: SthitiRoute,
+  GaaveVillageRoute: GaaveVillageRoute,
   GaaveIndexRoute: GaaveIndexRoute,
 }
 export const routeTree = rootRouteImport
