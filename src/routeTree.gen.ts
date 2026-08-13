@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PraveshRouteImport } from './routes/pravesh'
 import { Route as SamasyaRouteImport } from './routes/samasya'
+import { Route as SthitiRouteImport } from './routes/sthiti'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,35 +29,44 @@ const SamasyaRoute = SamasyaRouteImport.update({
   path: '/samasya',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SthitiRoute = SthitiRouteImport.update({
+  id: '/sthiti',
+  path: '/sthiti',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/pravesh': typeof PraveshRoute
   '/samasya': typeof SamasyaRoute
+  '/sthiti': typeof SthitiRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/pravesh': typeof PraveshRoute
   '/samasya': typeof SamasyaRoute
+  '/sthiti': typeof SthitiRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/pravesh': typeof PraveshRoute
   '/samasya': typeof SamasyaRoute
+  '/sthiti': typeof SthitiRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/pravesh' | '/samasya'
+  fullPaths: '/' | '/pravesh' | '/samasya' | '/sthiti'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/pravesh' | '/samasya'
-  id: '__root__' | '/' | '/pravesh' | '/samasya'
+  to: '/' | '/pravesh' | '/samasya' | '/sthiti'
+  id: '__root__' | '/' | '/pravesh' | '/samasya' | '/sthiti'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PraveshRoute: typeof PraveshRoute
   SamasyaRoute: typeof SamasyaRoute
+  SthitiRoute: typeof SthitiRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +92,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SamasyaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sthiti': {
+      id: '/sthiti'
+      path: '/sthiti'
+      fullPath: '/sthiti'
+      preLoaderRoute: typeof SthitiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PraveshRoute: PraveshRoute,
   SamasyaRoute: SamasyaRoute,
+  SthitiRoute: SthitiRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

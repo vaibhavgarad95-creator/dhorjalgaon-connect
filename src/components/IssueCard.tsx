@@ -32,10 +32,10 @@ export function IssueCard({
 }: {
   issue: IssueRow;
   votes: number;
-  hasVoted?: boolean;
-  onVote?: () => void;
-  showAudit?: boolean;
-  children?: React.ReactNode;
+  hasVoted?: boolean | undefined;
+  onVote?: (() => void) | undefined;
+  showAudit?: boolean | undefined;
+  children?: React.ReactNode | undefined;
 }) {
   return (
     <article className="gp-card overflow-hidden">
