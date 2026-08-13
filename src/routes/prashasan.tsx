@@ -8,7 +8,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { AppShell } from "@/components/AppShell";
 import { IssueCard, type IssueRow } from "@/components/IssueCard";
 import { useIssues } from "@/hooks/useIssues";
-import { STATUSES, statusLabel, toMarathiDigits, type IssueStatus } from "@/lib/gp";
+import { STATUS_LABEL, toMarathiDigits, type IssueStatus } from "@/lib/gp";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -93,7 +93,7 @@ function AnnouncementForm({ authorId, onDone }: { authorId: string; onDone: () =
     const { error } = await supabase.from("announcements").insert({
       title: title.trim().slice(0, 150),
       body: body.trim().slice(0, 2000),
-      author_id: authorId,
+      created_by: authorId,
     });
     setBusy(false);
     if (error) {
@@ -196,9 +196,9 @@ function AdminIssueForm({ issue, onDone }: { issue: IssueRow; onDone: () => void
           onChange={(e) => setStatus(e.target.value as IssueStatus)}
           className="mt-1 h-12 w-full rounded-md border border-input bg-background px-3 text-base"
         >
-          {STATUSES.map((s) => (
+          {(Object.keys(STATUS_LABEL) as IssueStatus[]).map((s) => (
             <option key={s} value={s}>
-              {statusLabel(s)}
+              {STATUS_LABEL[s]}
             </option>
           ))}
         </select>
