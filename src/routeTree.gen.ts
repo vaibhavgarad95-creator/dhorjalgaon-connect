@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PraveshRouteImport } from './routes/pravesh'
+import { Route as SamasyaRouteImport } from './routes/samasya'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,40 @@ const PraveshRoute = PraveshRouteImport.update({
   path: '/pravesh',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SamasyaRoute = SamasyaRouteImport.update({
+  id: '/samasya',
+  path: '/samasya',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/pravesh': typeof PraveshRoute
+  '/samasya': typeof SamasyaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/pravesh': typeof PraveshRoute
+  '/samasya': typeof SamasyaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/pravesh': typeof PraveshRoute
+  '/samasya': typeof SamasyaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/pravesh'
+  fullPaths: '/' | '/pravesh' | '/samasya'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/pravesh'
-  id: '__root__' | '/' | '/pravesh'
+  to: '/' | '/pravesh' | '/samasya'
+  id: '__root__' | '/' | '/pravesh' | '/samasya'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PraveshRoute: typeof PraveshRoute
+  SamasyaRoute: typeof SamasyaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PraveshRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/samasya': {
+      id: '/samasya'
+      path: '/samasya'
+      fullPath: '/samasya'
+      preLoaderRoute: typeof SamasyaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PraveshRoute: PraveshRoute,
+  SamasyaRoute: SamasyaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
