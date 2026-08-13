@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as KalpanaRouteImport } from './routes/kalpana'
+import { Route as PrashasanRouteImport } from './routes/prashasan'
 import { Route as PraveshRouteImport } from './routes/pravesh'
 import { Route as SamasyaRouteImport } from './routes/samasya'
 import { Route as SthitiRouteImport } from './routes/sthiti'
@@ -25,6 +26,11 @@ const IndexRoute = IndexRouteImport.update({
 const KalpanaRoute = KalpanaRouteImport.update({
   id: '/kalpana',
   path: '/kalpana',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrashasanRoute = PrashasanRouteImport.update({
+  id: '/prashasan',
+  path: '/prashasan',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PraveshRoute = PraveshRouteImport.update({
@@ -56,6 +62,7 @@ const GaaveVillageRoute = GaaveVillageRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/kalpana': typeof KalpanaRoute
+  '/prashasan': typeof PrashasanRoute
   '/pravesh': typeof PraveshRoute
   '/samasya': typeof SamasyaRoute
   '/sthiti': typeof SthitiRoute
@@ -65,6 +72,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/kalpana': typeof KalpanaRoute
+  '/prashasan': typeof PrashasanRoute
   '/pravesh': typeof PraveshRoute
   '/samasya': typeof SamasyaRoute
   '/sthiti': typeof SthitiRoute
@@ -75,6 +83,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/kalpana': typeof KalpanaRoute
+  '/prashasan': typeof PrashasanRoute
   '/pravesh': typeof PraveshRoute
   '/samasya': typeof SamasyaRoute
   '/sthiti': typeof SthitiRoute
@@ -86,6 +95,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/kalpana'
+    | '/prashasan'
     | '/pravesh'
     | '/samasya'
     | '/sthiti'
@@ -95,6 +105,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/kalpana'
+    | '/prashasan'
     | '/pravesh'
     | '/samasya'
     | '/sthiti'
@@ -104,6 +115,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/kalpana'
+    | '/prashasan'
     | '/pravesh'
     | '/samasya'
     | '/sthiti'
@@ -114,6 +126,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   KalpanaRoute: typeof KalpanaRoute
+  PrashasanRoute: typeof PrashasanRoute
   PraveshRoute: typeof PraveshRoute
   SamasyaRoute: typeof SamasyaRoute
   SthitiRoute: typeof SthitiRoute
@@ -135,6 +148,13 @@ declare module '@tanstack/react-router' {
       path: '/kalpana'
       fullPath: '/kalpana'
       preLoaderRoute: typeof KalpanaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prashasan': {
+      id: '/prashasan'
+      path: '/prashasan'
+      fullPath: '/prashasan'
+      preLoaderRoute: typeof PrashasanRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pravesh': {
@@ -178,6 +198,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   KalpanaRoute: KalpanaRoute,
+  PrashasanRoute: PrashasanRoute,
   PraveshRoute: PraveshRoute,
   SamasyaRoute: SamasyaRoute,
   SthitiRoute: SthitiRoute,
